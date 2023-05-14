@@ -1,10 +1,4 @@
-﻿# Scripts Nono
-# Indispensables
-# V:\03.PC\01.WINDOWS\04.COMPILATION_SCRIPTS\Menu_ALL-v2\archives\Scripts\MenuPremièreInstallationWindows\1.indispensables.ps1
-Clear-Host
-
-# Set-ExecutionPolicy Unrestricted
-Write-Host "On edite le Registre pour Set-ExecutionPolicy Unrestricted" -ForegroundColor Cyan
+﻿Write-Host "On edite le Registre pour Set-ExecutionPolicy Unrestricted" -ForegroundColor Cyan
 $filePathunrestricted = "$env:TEMP\edit_policy_unrestricted.bat"
 $content = '@echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\icacls.exe" "%SYSTEMROOT%\system32\config\system" && (

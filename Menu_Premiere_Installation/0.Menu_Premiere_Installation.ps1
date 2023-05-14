@@ -48,18 +48,20 @@ $runButton.Add_Click({
     $selectedScripts = $checkBoxes.Values | Where-Object { $_.Checked } | ForEach-Object { $_.Text }
     
     if ($selectedScripts.Count -eq 0) {
-        [System.Windows.Forms.MessageBox]::Show("No scripts selected.", "Information", "OK", "Information")
+        [System.Windows.Forms.MessageBox]::Show("No scripts selected.", "Information", "YesNo", "Information")
     }
     else {
-        [System.Windows.Forms.MessageBox]::Show("Running selected scripts. Please wait...", "Information", "OK", "Information")
-    
-        $selectedScripts | ForEach-Object {
+        $selectedScriptsText = $selectedScripts -join "`n"
+        $test = ([System.Windows.Forms.MessageBox]::Show("$selectedScriptsText", "Confirmation lancement", "YesNo"))
+        if ($test -eq "Yes") {
+            $selectedScripts | ForEach-Object {
             $scriptToRun = Join-Path $PSScriptRoot "$_.ps1"
             Write-Host "Running script: $scriptToRun"
             & $scriptToRun
+            [System.Windows.Forms.MessageBox]::Show("All selected scripts executed.", "OK")    
+        }
         }
     
-        [System.Windows.Forms.MessageBox]::Show("All selected scripts executed.", "Information", "OK", "Information")
     }
 })
 
